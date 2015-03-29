@@ -11,9 +11,9 @@ all: teoria.pdf
 # # -interactive=nonstopmode keeps the pdflatex backend from stopping at a
 # # missing file reference and interactively asking you for an alternative.
 
-teoria.pdf: ./doc/teoria.tex
-	cd doc; latexmk -f -pdf -pdflatex="pdflatex -interactive=nonstopmode" -use-make teoria.tex
+teoria.pdf: ./docs/teoria.tex
+	cd docs; latexmk -f -pdf -pdflatex="pdflatex -interactive=nonstopmode" -use-make teoria.tex
 
 clean:
-	cd doc; latexmk -CA
+	cd docs; latexmk -CA
 
