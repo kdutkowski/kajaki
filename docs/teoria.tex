@@ -1,0 +1,61 @@
+% This is based on the LLNCS.DEM the demonstration file of
+% the LaTeX macro package from Springer-Verlag
+% for Lecture Notes in Computer Science,
+% version 2.4 for LaTeX2e as of 16. April 2010
+%
+% See http://www.springer.com/computer/lncs/lncs+authors?SGWID=0-40209-0-0-0
+% for the full guidelines.
+%
+
+\documentclass{llncs}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[polish]{babel}
+\usepackage[colorinlistoftodos]{todonotes}
+\usepackage{hyperref}
+\usepackage{subfig}
+
+\begin{document}
+
+\title{Rozwiązanie problemu kajaków}
+%
+\titlerunning{Kajaki}  % abbreviated title (for running head)
+%                                     also used for the TOC unless
+%                                     \toctitle is used
+%
+\author{Tomasz Janiszewski\inst{1} \and Jakub Dutkowski\inst{2}}
+%
+\authorrunning{Tomasz Janiszewski, Jakub Dutkowski} % abbreviated author list (for running head)
+%
+%%%% list of authors for the TOC (use if author list has to be modified)
+\tocauthor{Tomasz Janiszewski and Jakub Dutkowski}
+
+\institute{Politechnika Warszawska\\
+Wydział Matematyki i Nauk Informacyjnych
+\email{janiszewskit@student.mini.pw.edu.pl}~~
+\email{dutkowskij@student.mini.pw.edu.pl}}
+
+\maketitle              % typeset the title of the contribution
+
+\keywords{Kajaki}
+%
+\section{Treść zadania}
+Są dwa kajaki i n osób i zbiór par osób które chcą się
+przepłynać kajakiem razem (jedna osoba może kolejno z wieloma osobami się
+przepłynać). Zastosować algorytm znajdujący skojarzenie doskonałe do
+wyznaczenia rozkładu jazdy kajaków, tak aby zminimalizować ilość kursów
+pojedynczym kajakiem, spełniając życzenia wszystkich osób.
+
+%
+% ---- Bibliography ----
+%
+\begin{thebibliography}{4}
+%
+\bibitem {cormen}
+Cormen, Thomas H. and Stein, Clifford and Rivest, Ronald L. and Leiserson, Charles E.:
+\textsl{Introduction to Algorithms}
+McGraw-Hill Higher Education, 2001
+\end{thebibliography}
+
+\end{document}
