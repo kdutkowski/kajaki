@@ -16,6 +16,7 @@
 \usepackage{hyperref}
 \usepackage{subfig}
 \usepackage{listings}
+\usepackage[]{algorithm2e}
 
 \begin{document}
 
@@ -82,6 +83,53 @@ Na wyjściu znajduje się jedna liczba będąca maksimum, z ilości kursów każ
 \end{lstlisting}
 
 \end{example}
+
+\section{Algorytm}
+Powyższy problem można rozwiązać następującym algorytmem
+
+\begin{algorithm}[H]
+ \caption{Algorytm wyznaczania rokładu pływania kajaków}
+ \KwData{$G$ -- graf przedstawiający preferencje pływania.
+ Krawędź pomiędzy wierzchołkami $i,j$ istnieje gdy osoba $i$ chce płynąć z osobą $j$}
+ \KwResult{Rozkład pływania kajaków zapisany w listach $k_1, k_2$}
+ $k_1$ = pust lista krawędzi\;
+ $k_2$ = pusta lista krawędzi\;
+ \While{$E(G) \neq \emptyset$}{
+  $s$ = skojarzenie doskonałe grafu $G$\;
+  $G = G - s$\;
+  \While{$s \neq \emptyset$}{
+	\eIf{$s \neq \emptyset$ and $s.peek()$ nie koliduje z $k_2$}{
+   		$k_1.push(s.pop())$\;
+     }{
+		$k_1.push(())$\;
+  	 }  	
+	\eIf{$s \neq \emptyset$ and $s.peek()$ nie koliduje z $k_1$}{
+   		$k_2.push(s.pop())$\;
+     }{
+		$k_2.push(())$\;
+  	 }  	
+  }
+ }
+\end{algorithm}
+
+\begin{proof}
+Zaużmy że powyższy algorym nie generuje optymalnego rozwiązania, to znaczy istnieje
+takie rozwiązanie w którym długość listy $k_1$ lub $k_2$ jest mniejsza.
+gdyby tak było to oznaczałoby to że wyznaczone skojarzenie grafu nie jest maksymalne/poprawne
+i w rezultacieu jedna z list $k_1$ lub $k_2$ byłaby wypełniana pustymi
+symbolami (oznaczającymi czekanie w danej rundzie).
+\end{proof}
+
+\subsection{Oszacowanie złożoności}
+
+Wyszukiwanie maksymalnego skojarenia grafu możemy oszacować przez $O(|V|^4)$\cite{wiki-blossom}.
+Liczbę takich przeszukiwań możemy z góry ograniczyć przez liczbę krawędzi czyli $|E|$. 
+Pozostałe operacje takie jak sprawdzenie czy krawędź nie koliduje z rozwiązaniem już znalezionym
+oraz dodawanie, zdejmowanie i sprawdzanie elementu na liście wykonujemy w czasie stałym $O(1)$.
+Daje to nam sumaryczną złożoność $O(|E||V|^4)$ co można oszacować z góry jako 
+\begin{equation}
+O(\frac{|V|(|V|-1)}{2} |V|^4) = O(|V|^6)
+\end{equation}
 
 %
 % ---- Bibliography ----
