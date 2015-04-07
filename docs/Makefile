@@ -12,7 +12,7 @@ all: teoria.pdf
 # # missing file reference and interactively asking you for an alternative.
 
 teoria.pdf: teoria.tex graph
-	latexmk -f -pdf -pdflatex="pdflatex -interactive=nonstopmode" -use-make teoria.tex
+	latexmk -quiet -f -pdf -pdflatex="pdflatex -interactive=nonstopmode" -use-make teoria.tex
 
 graph/%.pdf: graph/%.dot
 	neato $< -Tpdf -o $@
