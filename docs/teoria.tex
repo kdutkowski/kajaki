@@ -15,8 +15,13 @@
 \usepackage[colorinlistoftodos]{todonotes}
 \usepackage{hyperref}
 \usepackage{subfig}
-\usepackage{listings}
 \usepackage[]{algorithm2e}
+
+\usepackage{listings}
+\usepackage{courier}
+ \lstset{
+         basicstyle=\footnotesize\ttfamily   
+ }
 
 \begin{document}
 
@@ -59,7 +64,7 @@ przepłynąć z $m_{i,2}$
 Na wyjściu znajduje się jedna liczba będąca maksimum, z ilości kursów każdego z kajaków.
 
 
-\begin{example}
+\begin{example}~\\
 \begin{lstlisting}[title=Wejście]
 6 7
 1 2
