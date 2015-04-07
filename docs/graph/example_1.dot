@@ -1,0 +1,19 @@
+ graph example_1 {
+     a [label="1"];
+     b [label="2"];
+     c [label="3"];
+     d [label="4"];
+     e [label="5"];
+     f [label="6"];
+
+     a -- b [color=red];
+     a -- f;
+     b -- c;
+     b -- f [color=blue];
+     c -- e [color=blue];
+     d -- e;
+     e -- f [color=red];
+
+  { rank=same; b c }
+  { rank=same; f e d }
+ }

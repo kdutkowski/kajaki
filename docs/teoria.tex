@@ -15,6 +15,7 @@
 \usepackage[colorinlistoftodos]{todonotes}
 \usepackage{hyperref}
 \usepackage{subfig}
+\usepackage{listings}
 
 \begin{document}
 
@@ -41,11 +42,46 @@ Wydział Matematyki i Nauk Informacyjnych
 \keywords{Kajaki}
 %
 \section{Treść zadania}
-Są dwa kajaki i n osób i zbiór par osób które chcą się
+Są dwa kajaki, $n$ osób i zbiór par osób które chcą się
 przepłynać kajakiem razem (jedna osoba może kolejno z wieloma osobami się
 przepłynać). Zastosować algorytm znajdujący skojarzenie doskonałe do
 wyznaczenia rozkładu jazdy kajaków, tak aby zminimalizować ilość kursów
 pojedynczym kajakiem, spełniając życzenia wszystkich osób.
+
+\subsection{Opis wejścia}
+W pierwszej lini wejścia znajdują się dwie nieujemne liczby ($n, m$) takie że oznaczające odpowiednio
+ilość osób oraz liczbę par osób chcących popłynąć razem.
+W kolejnych $m$ liniach znajdują sie pary liczb oznaczające że osoba o numerze $m_{i,1}$ chce się
+przepłynąć z $m_{i,2}$
+
+\subsection{Opis wyjścia}
+Na wyjściu znajduje się jedna liczba będąca maksimum, z ilości kursów każdego z kajaków.
+
+
+\begin{example}
+\begin{lstlisting}[title=Wejście]
+6 7
+1 2
+1 6
+2 3
+2 6
+3 5
+4 5
+5 6
+\end{lstlisting}
+\begin{lstlisting}[title=Wyjście]
+4
+\end{lstlisting}
+
+\includegraphics[]{graph/example_1}
+\begin{lstlisting}[title=Przykładowy rokład plywania]
+1 6	2 3
+5 4	1 2
+5 6	 -
+2 6	3 5
+\end{lstlisting}
+
+\end{example}
 
 %
 % ---- Bibliography ----
@@ -56,6 +92,12 @@ pojedynczym kajakiem, spełniając życzenia wszystkich osób.
 Cormen, Thomas H. and Stein, Clifford and Rivest, Ronald L. and Leiserson, Charles E.:
 \textsl{Introduction to Algorithms}
 McGraw-Hill Higher Education, 2001
+\bibitem{mucha-sankowski}
+Mucha, Marcin and Sankowski, Piotr:
+\textsl{\href{http://www.mimuw.edu.pl/~mucha/pub/mucha_sankowski_focs04.pdf}{Maximum Matchings via Gaussian Elimination}}
+\bibitem{wiki-blossom}
+Wikipedia:
+\textsl{\href{http://en.wikipedia.org/wiki/Blossom_algorithm}{Edmonds's matching algorithm}}
 \end{thebibliography}
 
 \end{document}
