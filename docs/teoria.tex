@@ -103,6 +103,7 @@ Powyższy problem można rozwiązać następującym algorytmem
   $s$ = skojarzenie doskonałe grafu $G$\;
   $G = G - s$\;
   \While{$s \neq \emptyset$}{
+  	\tcc{kolizja - istnienie tego samego wierzchołka na drugiej liście na tej samej pozycji.}
 	\eIf{$s \neq \emptyset$ and $s.peek()$ nie koliduje z $k_2$}{
    		$k_1.push(s.pop())$\;
      }{
