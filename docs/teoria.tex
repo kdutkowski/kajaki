@@ -120,8 +120,9 @@ Powyższy problem można rozwiązać następującym algorytmem
 \begin{proof}
 Załóżmy, że powyższy algorym nie generuje optymalnego rozwiązania, to znaczy istnieje
 takie rozwiązanie w którym długość listy $k_1$ lub $k_2$ jest mniejsza niż znaleziona wartość.
-Gdyby tak było to oznaczałoby to że wyznaczone skojarzenie grafu nie jest maksymalne/poprawne
-i w rezultacie jedna z list $k_1$ lub $k_2$ byłaby wypełniana pustymi
+Gdyby tak było to oznaczałoby to że jednym z przejść pętli istnieje
+skojarzenie zawierające więcej krawędzi niż skojarzenie $s$. 
+Oznaczało by to, że $s$ nie jest maksymalne/poprawne i w rezultacie jedna z list $k_1$ lub $k_2$ byłaby wypełniana pustymi
 symbolami (oznaczającymi czekanie w danej rundzie).
 \end{proof}
 
