@@ -5,4 +5,4 @@ all:
 	$(addsuffix .pdf, $(basename $(wildcard *.dot)))
 
 clean:
-	rm -v *.pdf
+	rm -fv *.pdf
