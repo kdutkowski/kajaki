@@ -17,6 +17,8 @@
 \usepackage{subfig}
 \usepackage[]{algorithm2e}
 
+\usepackage{float}
+
 \usepackage{listings}
 \usepackage{courier}
  \lstset{
@@ -64,7 +66,7 @@ przepłynąć z $m_{i,2}$
 Na wyjściu znajduje się jedna liczba będąca maksimum z liczby kursów każdego z kajaków.
 
 
-\begin{example}~\\
+\begin{example} \label{przyklad} ~\\
 \begin{lstlisting}[title=Wejście]
 6 7
 1 2
@@ -79,7 +81,6 @@ Na wyjściu znajduje się jedna liczba będąca maksimum z liczby kursów każde
 4
 \end{lstlisting}
 
-\includegraphics[]{graph/example_1}
 \begin{lstlisting}[title=Przykładowy rozkład plywania]
 1 6	2 3
 5 4	1 2
@@ -92,6 +93,71 @@ Na wyjściu znajduje się jedna liczba będąca maksimum z liczby kursów każde
 \section{Algorytm}
 Powyższy problem można rozwiązać następującym algorytmem
 
+\subsection{Opis}
+Budujemy graf opisujący dane wejściowe, w którym wierzchołkami są osoby. Wierzchołki są
+połączone krawędzią jeśli dwie osoby chcą się razem przepłynąć.
+Krok algorytmu polega na znalezieniu maksymalnego skojarzenia w grafie i zapisaniu go 
+do dwóch list odpowiadających użyciu każdego z kajaków. Jeśli w danej chwili jeden 
+z kajaków nie może płynąć (osoba, która miała nim płynąć jest już zapisana na rejs
+drugim kajakiem) to listę uzupełniamy o symbol oznaczający oczekiwanie kajaku.
+Na wyjście zwracane jest maksimum z długości list.
+
+\begin{example}~\\
+Posłużymy się danymi z przykładu \ref{przyklad}.
+\begin{figure}[H]
+  \caption{Graf $G$}
+  \centering
+	\includegraphics[scale=0.5]{graph/example_2_step_1}
+\end{figure}
+W pierwszym kroku algorytm wyszukiwania maksymalnego skojarzenia zwraca następujące krawędzie:
+\begin{lstlisting}[title=Maksymalne skojarzenie grafu $G$]
+1 6
+2 3
+5 4
+\end{lstlisting}
+W związku z czym rozkład pływania wygląda następująco:
+\begin{lstlisting}[title=Rozkład plywania po kroku pierwszym]
+1 6	2 3
+5 4	
+\end{lstlisting}
+\begin{figure}[H]
+  \caption{Graf $G'$}
+  \centering
+	\includegraphics[scale=0.5]{graph/example_2_step_2}
+\end{figure}
+W drugim kroku algorytm wyszukiwania maksymalnego skojarzenia zwraca następujące krawędzie:
+\begin{lstlisting}[title=Maksymalne skojarzenie grafu $G'$]
+1 2
+6 5
+\end{lstlisting}
+W związku z czym rozkład pływania wygląda następująco:
+\begin{lstlisting}[title=Rozkład plywania po kroku drugim]
+1 6	2 3
+5 4	1 2
+5 6
+\end{lstlisting}
+\begin{figure}[H]
+  \caption{Graf $G''$}
+  \centering
+	\includegraphics[scale=0.5]{graph/example_2_step_3}
+\end{figure}
+W trzecim kroku algorytm wyszukiwania maksymalnego skojarzenia zwraca następujące krawędzie:
+\begin{lstlisting}[title=Maksymalne skojarzenie grafu $G''$]
+2 6
+3 5
+\end{lstlisting}
+W związku z czym rozkład pływania wygląda następująco:
+\begin{lstlisting}[title=Rozkład plywania po kroku trzecim]
+1 6	2 3
+5 4	1 2
+5 6	 -
+2 6	3 5
+\end{lstlisting}
+Ponieważ nie ma już krawędzi w badanym grafie algorytm kończy działanie. Wynikiem pracy jest
+liczbe $4$.
+\end{example}
+
+\subsection{Pesudokod}
 \begin{algorithm}[H]
  \caption{Algorytm wyznaczania rokładu pływania kajaków}
  \KwData{$G$ -- graf przedstawiający preferencje pływania.
@@ -100,7 +166,7 @@ Powyższy problem można rozwiązać następującym algorytmem
  $k_1$ = pusta lista krawędzi\;
  $k_2$ = pusta lista krawędzi\;
  \While{$E(G) \neq \emptyset$}{
-  $s$ = skojarzenie doskonałe grafu $G$\;
+  $s$ = skojarzenie maksymalne grafu $G$\;
   $G = G - s$\;
   \While{$s \neq \emptyset$}{
   	\tcc{kolizja - istnienie tego samego wierzchołka na drugiej liście na tej samej pozycji.}
