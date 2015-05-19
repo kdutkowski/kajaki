@@ -22,7 +22,8 @@
 \usepackage{listings}
 \usepackage{courier}
  \lstset{
-         basicstyle=\footnotesize\ttfamily   
+         basicstyle=\footnotesize\ttfamily,
+         xleftmargin=.4\textwidth, xrightmargin=.2\textwidth
  }
 
 \begin{document}
@@ -91,7 +92,7 @@ Na wyjściu znajduje się jedna liczba będąca maksimum z liczby kursów każde
 \end{example}
 
 \section{Algorytm}
-Powyższy problem można rozwiązać następującym algorytmem
+Powyższy problem można rozwiązać następującym algorytmem:
 
 \subsection{Opis}
 Budujemy graf opisujący dane wejściowe. Będziemy w nim szukali 
@@ -111,7 +112,7 @@ skokiem grafu $G'$.
 
 W tak otrzymanym grafie $G$ szukamy największego 
 skojarzenia. Znalezione krawędzie definują
-pary które mogą razem płynąć. Następnie usuwamy użyte
+pary, które mogą razem płynąć. Następnie usuwamy użyte
 wierzchołki z grafu i powtarzamy krok.
 Algorytm kończymy gdy graf $G$ nie ma już żadnej krawędzi.
 Pozostałe wierzchołki dopisujemy do listy płynących
@@ -130,20 +131,20 @@ Konstruujemy graf krawędziowy go $G''$
   \centering
 	\includegraphics[scale=0.5]{graph/example_2_step_2}
 \end{figure}
-Wyznaczamy przecodnie domknięcie z jednym skokiem grafu $G'$
+Wyznaczamy przechodnie domknięcie z jednym skokiem grafu $G'$
 \begin{figure}[H]
   \caption{Graf $G$}
   \centering
 	\includegraphics[scale=0.5]{graph/example_2_step_3}
 \end{figure}
 
-W grafie $G$ szukamy skojarzenia. Może to być na przykład
+W grafie $G$ szukamy maksymalnego skojarzenia. Może to być na przykład
 \begin{lstlisting}[title=Możliwe skojarzenie]
 1 6	3 5
 2 3	1 6
 5 4	2 6
 \end{lstlisting}
-Po usunięciu wybranych wierzhcołków pozostaje nam tylko jeden 
+Po usunięciu wybranych wierzchołków pozostaje nam tylko jeden 
 wierzchołek $5|6$.
 \begin{lstlisting}[title=Możliwy rozkład pływania]
 1 6	3 5
