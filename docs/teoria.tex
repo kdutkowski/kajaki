@@ -94,73 +94,73 @@ Na wyjściu znajduje się jedna liczba będąca maksimum z liczby kursów każde
 Powyższy problem można rozwiązać następującym algorytmem
 
 \subsection{Opis}
-Budujemy graf opisujący dane wejściowe, w którym wierzchołkami są osoby. Wierzchołki są
-połączone krawędzią jeśli dwie osoby chcą się razem przepłynąć.
-Krok algorytmu polega na znalezieniu maksymalnego skojarzenia w grafie i zapisaniu go 
-do dwóch list odpowiadających użyciu każdego z kajaków. Jeśli w danej chwili jeden 
-z kajaków nie może płynąć (osoba, która miała nim płynąć jest już zapisana na rejs
-drugim kajakiem) to listę uzupełniamy o symbol oznaczający oczekiwanie kajaku.
-Na wyjście zwracane jest maksimum z długości list.
+Budujemy graf opisujący dane wejściowe. Będziemy w nim szukali 
+największego skojarzenia, które zdefiniuje schemat pływania.
+W każdym kroku po znaleziemu skojarzenia będziemy usuwać 
+użyte wierzchołki i powtarzać krok aż do uzyskania grafu bez krawędzi.
 
+\subsubsection{Budowa grafu}
+Graf uzyskamy w następujący sposób. Budujemy
+graf $G''$ w którym każdej osobie odpowiada pojedynczy 
+wierzchołek. Wierzchołki są połączone krawędzią wtedy
+i tylko wtedy gdy odpowiadające im dwie osoby chcą płynąć razem.
+Następnie tworzymy graf kawędziowy $G'$ z grafu $G''$.
+Ostatnim krokiem jest wyznaczenie grafu $G$
+jako przechodniego domknięcia z jednym 
+skokiem grafu $G'$.
+
+W tak otrzymanym grafie $G$ szukamy największego 
+skojarzenia. Znalezione krawędzie definują
+pary które mogą razem płynąć. Następnie usuwamy użyte
+wierzchołki z grafu i powtarzamy krok.
+Algorytm kończymy gdy graf $G$ nie ma już żadnej krawędzi.
+Pozostałe wierzchołki dopisujemy do listy płynących
+osób.
 \begin{example}~\\
 Posłużymy się danymi z przykładu \ref{przyklad}.
+Budujemy graf określający chęć płynięcia.
 \begin{figure}[H]
-  \caption{Graf $G$}
+  \caption{Graf $G''$}
   \centering
 	\includegraphics[scale=0.5]{graph/example_2_step_1}
 \end{figure}
-W pierwszym kroku algorytm wyszukiwania maksymalnego skojarzenia zwraca następujące krawędzie:
-\begin{lstlisting}[title=Maksymalne skojarzenie grafu $G$]
-1 6
-2 3
-5 4
-\end{lstlisting}
-W związku z czym rozkład pływania wygląda następująco:
-\begin{lstlisting}[title=Rozkład plywania po kroku pierwszym]
-1 6	2 3
-5 4	
-\end{lstlisting}
+Konstruujemy graf krawędziowy go $G''$
 \begin{figure}[H]
   \caption{Graf $G'$}
   \centering
 	\includegraphics[scale=0.5]{graph/example_2_step_2}
 \end{figure}
-W drugim kroku algorytm wyszukiwania maksymalnego skojarzenia zwraca następujące krawędzie:
-\begin{lstlisting}[title=Maksymalne skojarzenie grafu $G'$]
-1 2
-6 5
-\end{lstlisting}
-W związku z czym rozkład pływania wygląda następująco:
-\begin{lstlisting}[title=Rozkład plywania po kroku drugim]
-1 6	2 3
-5 4	1 2
-5 6
-\end{lstlisting}
+Wyznaczamy przecodnie domknięcie z jednym skokiem grafu $G'$
 \begin{figure}[H]
-  \caption{Graf $G''$}
+  \caption{Graf $G$}
   \centering
 	\includegraphics[scale=0.5]{graph/example_2_step_3}
 \end{figure}
-W trzecim kroku algorytm wyszukiwania maksymalnego skojarzenia zwraca następujące krawędzie:
-\begin{lstlisting}[title=Maksymalne skojarzenie grafu $G''$]
-2 6
-3 5
+
+W grafie $G$ szukamy skojarzenia. Może to być na przykład
+\begin{lstlisting}[title=Możliwe skojarzenie]
+1 6	3 5
+2 3	1 6
+5 4	2 6
 \end{lstlisting}
-W związku z czym rozkład pływania wygląda następująco:
-\begin{lstlisting}[title=Rozkład plywania po kroku trzecim]
-1 6	2 3
-5 4	1 2
+Po usunięciu wybranych wierzhcołków pozostaje nam tylko jeden 
+wierzchołek $5|6$.
+\begin{lstlisting}[title=Możliwy rozkład pływania]
+1 6	3 5
+2 3	1 6
+5 4	2 6
 5 6	 -
-2 6	3 5
 \end{lstlisting}
-Ponieważ nie ma już krawędzi w badanym grafie algorytm kończy działanie. Odpowiedzią algorytmu jest liczba $4$.
+
 \end{example}
 
 \subsection{Pesudokod}
 \begin{algorithm}[H]
  \caption{Algorytm wyznaczania rokładu pływania kajaków}
- \KwData{$G$ -- graf przedstawiający preferencje pływania.
- Krawędź pomiędzy wierzchołkami $i,j$ istnieje gdy osoba $i$ chce płynąć z osobą $j$}
+ \KwData{$G$ -- graf przedstawiający preferencje pływania\;
+ $V$ -- funkcja zwracająca listę wierzchołków podanego grafu\;
+ $E$ -- funkcja zwracająca listę krawędzi podanego grafu\;
+ }
  \KwResult{Rozkład pływania kajaków zapisany w listach $k_1, k_2$}
  $k_1$ = pusta lista krawędzi\;
  $k_2$ = pusta lista krawędzi\;
@@ -168,19 +168,20 @@ Ponieważ nie ma już krawędzi w badanym grafie algorytm kończy działanie. Od
   $s$ = skojarzenie maksymalne grafu $G$\;
   $G = G - s$\;
   \While{$s \neq \emptyset$}{
-  	\tcc{kolizja - istnienie tego samego wierzchołka na drugiej liście na tej samej pozycji.}
-	\eIf{$s \neq \emptyset$ and $s.peek()$ nie koliduje z $k_2$}{
-   		$k_1.push(s.pop())$\;
-     }{
-		$k_1.push(())$\;
-  	 }  	
-	\eIf{$s \neq \emptyset$ and $s.peek()$ nie koliduje z $k_1$}{
-   		$k_2.push(s.pop())$\;
-     }{
-		$k_2.push(())$\;
-  	 }  	
+    $pair = s.pop()$\;
+  	$k_1.push(pair.first())$\;
+  	$k_2.push(pair.second())$\;
   }
  }
+ \While{$V(G) \neq \emptyset$}{
+ 	$v = V(G).pop()$\;
+ 	\tcc{kolizja - istnienie tego samego wierzchołka na drugiej liście na tej samej pozycji.}
+	\eIf{$v$ nie koliduje z $k_2$ i $len(k_2) > len(k_1)$}{
+   		$k_1.push(v)$\;
+     }{
+		$k_1.push(v)$\;
+  	 }  	 	
+ }  	
 \end{algorithm}
 
 \begin{proof}
@@ -193,12 +194,16 @@ symbolami (oznaczającymi czekanie w danej rundzie).
 \end{proof}
 
 \subsection{Oszacowanie złożoności}
-
+Budowanie grafu wymaga zbudowania grafu krawędziowego i znalezienie w nim przechodniego domknięcia. zbudowanie grafu krawędziowego
+wymaga przejścia przez wszystkie krawędzie grafu co można 
+szacować jako $O(E)$. Znalezienie przechodniego domknięcia
+można wykonać przechodząc przez wszystkie krawędzie, 
+co można szacować przez $O(E)$
 Wyszukiwanie maksymalnego skojarzenia grafu możemy oszacować przez $O(|V|^4)$\cite{wiki-blossom}.
 Liczbę takich przeszukiwań możemy z góry ograniczyć przez liczbę krawędzi czyli $|E|$. 
 Pozostałe operacje takie jak sprawdzenie czy krawędź nie koliduje z rozwiązaniem już znalezionym
 oraz dodawanie, zdejmowanie i sprawdzanie elementu na liście wykonujemy w czasie stałym $O(1)$.
-Daje to nam sumaryczną złożoność $O(|E||V|^4)$ co można oszacować z góry jako 
+Daje to nam sumaryczną złożoność $O(|E|+|E||V|^4)$ co można oszacować z góry jako 
 \begin{equation}
 O(\frac{|V|(|V|-1)}{2} |V|^4) = O(|V|^6)
 \end{equation}

@@ -1,4 +1,5 @@
  graph example_1 {
+   layout=neato;
      a [label="1"];
      b [label="2"];
      c [label="3"];
@@ -6,13 +7,13 @@
      e [label="5"];
      f [label="6"];
 
-     a -- b [color=red];
+     a -- b;
      a -- f;
      b -- c;
-     b -- f [color=blue];
-     c -- e [color=blue];
+     b -- f;
+     c -- e;
      d -- e;
-     e -- f [color=red];
+     e -- f;
 
   { rank=same; b c }
   { rank=same; f e d }

@@ -1,8 +1,8 @@
-%.pdf: %.dot
-	neato $< -Tpdf -o $@
+%.png: %.dot
+	dot $< -Tpng -o $@
 
-all: 
-	$(addsuffix .pdf, $(basename $(wildcard *.dot)))
+all:
+	$(addsuffix .png, $(basename $(wildcard *.dot)))
 
 clean:
 	rm -fv *.pdf
