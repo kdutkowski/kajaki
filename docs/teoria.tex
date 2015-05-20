@@ -96,8 +96,8 @@ Powyższy problem można rozwiązać następującym algorytmem:
 
 \subsection{Opis}
 Budujemy graf opisujący dane wejściowe. Będziemy w nim szukali 
-największego skojarzenia, które zdefiniuje schemat pływania.
-W każdym kroku po znaleziemu skojarzenia będziemy usuwać 
+maksymalnego skojarzenia, które zdefiniuje schemat pływania.
+W każdym kroku po znalezieniu skojarzenia będziemy usuwać 
 użyte wierzchołki i powtarzać krok aż do uzyskania grafu bez krawędzi.
 
 \subsubsection{Budowa grafu}
@@ -106,10 +106,12 @@ graf $G''$ w którym każdej osobie odpowiada pojedynczy
 wierzchołek. Wierzchołki są połączone krawędzią wtedy
 i tylko wtedy gdy odpowiadające im dwie osoby chcą płynąć razem.
 Następnie tworzymy graf krawędziowy $G'$ z grafu $G''$.
-Ostatnim krokiem jest wyznaczenie grafu $G$
-jako przechodniego domknięcia z jednym 
-skokiem grafu $G'$.
 
+Ostatnim krokiem jest wyznaczenie grafu $G$
+o zbiorze wierzchołków równym $V(G')$, ale krawędzią
+połączone będą tylko te wierzchołki, między którymi w grafie $G'$
+istnieje ścieżka długości 2 i nie istnieje ścieżka długości 1.
+\\\\
 W tak otrzymanym grafie $G$ szukamy największego 
 skojarzenia. Znalezione krawędzie definują
 pary, które mogą razem płynąć. Następnie usuwamy użyte
@@ -125,13 +127,13 @@ Budujemy graf określający chęć płynięcia.
   \centering
 	\includegraphics[scale=0.5]{graph/example_2_step_1}
 \end{figure}
-Konstruujemy graf krawędziowy go $G''$
+Konstruujemy graf krawędziowy $G''$
 \begin{figure}[H]
   \caption{Graf $G'$}
   \centering
 	\includegraphics[scale=0.5]{graph/example_2_step_2}
 \end{figure}
-Wyznaczamy przechodnie domknięcie z jednym skokiem grafu $G'$
+Wyznaczamy graf $G$
 \begin{figure}[H]
   \caption{Graf $G$}
   \centering
@@ -191,11 +193,13 @@ takie rozwiązanie w którym długość listy $k_1$ lub $k_2$ jest mniejsza niż
 Gdyby tak było to oznaczałoby to że jednym z przejść pętli istnieje
 skojarzenie zawierające więcej krawędzi niż skojarzenie $s$. 
 Oznaczało by to, że $s$ nie jest maksymalne/poprawne i w rezultacie jedna z list $k_1$ lub $k_2$ byłaby wypełniana pustymi
-symbolami (oznaczającymi czekanie w danej rundzie). Ponadto konstrukcja grafu $G$ zapewnia, że żadna z par wierzchołków należących do skojarzenia znalezionego w tym grafie nie będzie zawierała żadnego wierzchołka więcej niż raz - tj. nie będzie powodowała kolizji. Wynika to z tego, że w grafie $G$ krawędzie łączą tylko wierzchołki odpowiadające krawędziom grafu $G''$ nie posiadającym wspólnego wierzchołka.
+symbolami (oznaczającymi czekanie w danej rundzie). 
+\\\\
+Ponadto konstrukcja grafu $G$ zapewnia, że żadna z par wierzchołków należących do skojarzenia znalezionego w tym grafie nie będzie zawierała żadnego wierzchołka więcej niż raz - tj. nie będzie powodowała kolizji. Wynika to z tego, że w grafie $G$ krawędzie łączą tylko wierzchołki odpowiadające krawędziom grafu $G''$ nie posiadającym wspólnego wierzchołka.
 \end{proof}
 
 \subsection{Oszacowanie złożoności}
-Budowanie grafu wymaga zbudowania grafu krawędziowego i znalezienie w nim przechodniego domknięcia. zbudowanie grafu krawędziowego
+Budowanie grafu wymaga zbudowania grafu krawędziowego i znalezienie w nim przechodniego domknięcia. Zbudowanie grafu krawędziowego
 wymaga przejścia przez wszystkie krawędzie grafu co można 
 szacować jako $O(E)$. Znalezienie przechodniego domknięcia
 można wykonać przechodząc przez wszystkie krawędzie, 
