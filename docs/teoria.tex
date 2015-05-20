@@ -105,7 +105,7 @@ Graf uzyskamy w następujący sposób. Budujemy
 graf $G''$ w którym każdej osobie odpowiada pojedynczy 
 wierzchołek. Wierzchołki są połączone krawędzią wtedy
 i tylko wtedy gdy odpowiadające im dwie osoby chcą płynąć razem.
-Następnie tworzymy graf kawędziowy $G'$ z grafu $G''$.
+Następnie tworzymy graf krawędziowy $G'$ z grafu $G''$.
 Ostatnim krokiem jest wyznaczenie grafu $G$
 jako przechodniego domknięcia z jednym 
 skokiem grafu $G'$.
@@ -138,8 +138,8 @@ Wyznaczamy przechodnie domknięcie z jednym skokiem grafu $G'$
 	\includegraphics[scale=0.5]{graph/example_2_step_3}
 \end{figure}
 
-W grafie $G$ szukamy maksymalnego skojarzenia. Może to być na przykład
-\begin{lstlisting}[title=Możliwe skojarzenie]
+W grafie $G$ szukamy maksymalnego skojarzenia (oznaczone kolorem czerwonym).
+\begin{lstlisting}[title=Maksymalne skojarzenie]
 1 6	3 5
 2 3	1 6
 5 4	2 6
@@ -176,11 +176,11 @@ wierzchołek $5|6$.
  }
  \While{$V(G) \neq \emptyset$}{
  	$v = V(G).pop()$\;
- 	\tcc{kolizja - istnienie tego samego wierzchołka na drugiej liście na tej samej pozycji.}
+ 	\tcc{kolizja - istnienie tego samego wierzchołka na obu listach na tej samej pozycji.}
 	\eIf{$v$ nie koliduje z $k_2$ i $len(k_2) > len(k_1)$}{
    		$k_1.push(v)$\;
      }{
-		$k_1.push(v)$\;
+		$k_2.push(v)$\;
   	 }  	 	
  }  	
 \end{algorithm}
@@ -191,7 +191,7 @@ takie rozwiązanie w którym długość listy $k_1$ lub $k_2$ jest mniejsza niż
 Gdyby tak było to oznaczałoby to że jednym z przejść pętli istnieje
 skojarzenie zawierające więcej krawędzi niż skojarzenie $s$. 
 Oznaczało by to, że $s$ nie jest maksymalne/poprawne i w rezultacie jedna z list $k_1$ lub $k_2$ byłaby wypełniana pustymi
-symbolami (oznaczającymi czekanie w danej rundzie).
+symbolami (oznaczającymi czekanie w danej rundzie). Ponadto konstrukcja grafu $G$ zapewnia, że żadna z par wierzchołków należących do skojarzenia znalezionego w tym grafie nie będzie zawierała żadnego wierzchołka więcej niż raz - tj. nie będzie powodowała kolizji. Wynika to z tego, że w grafie $G$ krawędzie łączą tylko wierzchołki odpowiadające krawędziom grafu $G''$ nie posiadającym wspólnego wierzchołka.
 \end{proof}
 
 \subsection{Oszacowanie złożoności}
