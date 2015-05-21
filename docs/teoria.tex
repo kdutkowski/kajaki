@@ -121,7 +121,7 @@ Pozostałe wierzchołki dopisujemy do listy płynących
 osób.
 \begin{example}~\\
 Posłużymy się danymi z przykładu \ref{przyklad}.
-Budujemy graf określający chęć płynięcia.
+Budujemy graf określający preferencje pływania.
 \begin{figure}[H]
   \caption{Graf $G''$}
   \centering
@@ -199,20 +199,25 @@ Ponadto konstrukcja grafu $G$ zapewnia, że żadna z par wierzchołków należą
 \end{proof}
 
 \subsection{Oszacowanie złożoności}
-Budowanie grafu wymaga zbudowania grafu krawędziowego i znalezienie w nim przechodniego domknięcia. Zbudowanie grafu krawędziowego
-wymaga przejścia przez wszystkie krawędzie grafu co można 
-szacować jako $O(E)$. Znalezienie przechodniego domknięcia
-można wykonać przechodząc przez wszystkie krawędzie, 
-co można szacować przez $O(E)$
+Budowanie grafu $G$ wymaga zbudowania grafu krawędziowego i znalezienie w nim ścieżek długości 2. 
+
+
+Zbudowanie grafu krawędziowego $G''$
+wymaga przejścia przez wszystkie krawędzie grafu i sprawdzenia, czy ma punkty wspólne z każdą inną krawędzią co można 
+szacować jako $O(E^2)$. 
+
+
+Aby wyznaczyć graf $G'$ wystarczy podnieść macierz sąsiedztwa do kwadratu i porównać z oryginalną macierzą sąsiedztwa. Złożoność szacujemy jako $O(V^3)$.
+
+ 
 Wyszukiwanie maksymalnego skojarzenia grafu możemy oszacować przez $O(|V|^4)$\cite{wiki-blossom}.
 Liczbę takich przeszukiwań możemy z góry ograniczyć przez liczbę krawędzi czyli $|E|$. 
 Pozostałe operacje takie jak sprawdzenie czy krawędź nie koliduje z rozwiązaniem już znalezionym
 oraz dodawanie, zdejmowanie i sprawdzanie elementu na liście wykonujemy w czasie stałym $O(1)$.
-Daje to nam sumaryczną złożoność $O(|E|+|E||V|^4)$ co można oszacować z góry jako 
+Daje to nam sumaryczną złożoność $O(|E^2|+|V^3|+|E||V|^4)$ co można oszacować z góry jako 
 \begin{equation}
-O(\frac{|V|(|V|-1)}{2} |V|^4) = O(|V|^6)
+O(|V|^6)
 \end{equation}
-
 %
 % ---- Bibliography ----
 %
