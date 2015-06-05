@@ -5,6 +5,7 @@ import re
 import sys
 import logging
 import coloredlogs
+from solver import Solver
 
 
 def main():
@@ -18,6 +19,9 @@ def main():
     pairs = read_pairs_from_input(input_path)
 
     logger.info("read %d pairs" % len(pairs))
+
+    solver = Solver()
+    solver.solve(pairs)
 
 def read_pairs_from_input(input_path):
     pairs = []
