@@ -1,7 +1,5 @@
 from solver import Solver
-
-__author__ = 'dud'
-
+import networkx as nx
 import unittest
 
 

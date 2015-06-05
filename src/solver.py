@@ -1,7 +1,6 @@
 import logging
 import networkx as nx
 
-__author__ = 'dud'
 
 class Solver:
     def __init__(self):

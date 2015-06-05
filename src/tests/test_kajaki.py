@@ -1,7 +1,4 @@
 import string
-
-__author__ = 'dud'
-
 import unittest
 import kajaki
 
