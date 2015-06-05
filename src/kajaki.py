@@ -1,16 +1,37 @@
 #!/usr/bin/env python
 
 import getopt
+import re
 import sys
 import logging
 import coloredlogs
 
 
 def main():
-    opts, args = getopt.getopt(sys.argv[1:], "h", ["help"])
+    opts, args = getopt.getopt(sys.argv[1:], "i", ["input"])
     logger = logging.getLogger('kajaki')
     coloredlogs.install(level=logging.DEBUG)
-    logger.info("kajaki run %d %d" % (5, 4))
+
+    input_path = args[0]
+    logger.info("reading input data from %s" % (input_path))
+
+    pairs = read_pairs_from_input(input_path)
+
+    logger.info("read %d pairs" % len(pairs))
+
+def read_pairs_from_input(input_path):
+    pairs = []
+    with open(input_path) as f:
+        for line in f:
+            pairs.append(parse_line_to_tuple(line))
+    return pairs
+
+
+def parse_line_to_tuple(line):
+    mo = re.match("^(\d+) (\d+)$", line)
+    if mo:
+        return tuple(map(lambda x: int(x), mo.groups()))
+
 
 if __name__ == "__main__":
     main()
