@@ -3,6 +3,10 @@ import networkx as nx
 import unittest
 
 
+def are_eq(a, b):
+    return set(a) == set(b) and len(a) == len(b)
+
+
 class SolverTest(unittest.TestCase):
     def setUp(self):
         self.solver = Solver()
@@ -18,9 +22,14 @@ class SolverTest(unittest.TestCase):
         self.assertEqual(graph.number_of_nodes(), 5)
         self.assertFalse(graph.is_multigraph())
 
+    def test_should_create_GI_from_graphII(self):
+        graphII = self.solver.create_graphII_from_pairs([(1, 2), (2, 3), (3, 4)])
+        graphI = nx.line_graph(graphII)
 
-def are_eq(a, b):
-    return set(a) == set(b) and len(a) == len(b)
+        self.assertTrue(graphI.has_edge((1, 2), (2, 3)))
+        self.assertTrue(graphI.has_edge((2, 3), (3, 4)))
+        self.assertFalse(graphI.has_edge((4, 1), (1, 2)))
+        self.assertEqual(graphI.number_of_nodes(), 3)
 
 
 if __name__ == '__main__':

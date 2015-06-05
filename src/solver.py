@@ -14,3 +14,7 @@ class Solver:
         graph.add_edges_from(pairs)
         return graph
 
+    def create_graphI_from_graphII(self, graphII):
+        graph = nx.line_graph(graphII)
+        return graph
+
