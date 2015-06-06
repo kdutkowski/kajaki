@@ -15,13 +15,14 @@ def main():
 
     input_path = args[0]
     logger.info("reading input data from %s" % (input_path))
-
     pairs = read_pairs_from_input(input_path)
-
     logger.info("read %d pairs" % len(pairs))
 
     solver = Solver()
-    solver.solve(pairs)
+    order = solver.solve(pairs)
+
+    logger.info("Found order of length %d:\n%s", len(order), "\n".join(map(str, order)))
+
 
 def read_pairs_from_input(input_path):
     pairs = []

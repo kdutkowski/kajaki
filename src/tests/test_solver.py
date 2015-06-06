@@ -31,6 +31,15 @@ class SolverTest(unittest.TestCase):
         self.assertFalse(graphI.has_edge((4, 1), (1, 2)))
         self.assertEqual(graphI.number_of_nodes(), 3)
 
+    def test_should_find_best_order(self):
+        graph = nx.Graph()
+        graph.add_edges_from([((1, 2), (2, 3)), ((2, 3), (3, 4)), ((3, 4), (4, 5))])
+
+        compl_graph = self.solver.create_graph_from_graphI(graph)
+
+        order = self.solver.find_best_order(compl_graph)
+        a = 5
+
 
 if __name__ == '__main__':
     unittest.main()
