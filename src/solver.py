@@ -26,15 +26,18 @@ class Solver:
         return graph
 
     def find_best_order(self, graph):
-        order = []
-        matching = nx.maximal_matching(graph)
+        canoes = [[], []]
+        matching = nx.max_weight_matching(graph)
         while len(matching) > 0:
-            for turn in matching:
-                order.append(turn)
-                for pair in turn:
-                    graph.remove_node(pair)
-            matching = nx.maximal_matching(graph)
+            for key, value in matching.iteritems():
+                if key not in canoes[1]:
+                    canoes[0].append(key)
+                    canoes[1].append(value)
+                    graph.remove_node(key)
+                    graph.remove_node(value)
+            matching = nx.max_weight_matching(graph)
 
+        order = [(x, y) for x, y in zip(canoes[0], canoes[1])]
         for node in graph.nodes_iter():
             order.append((node, ()))
 
