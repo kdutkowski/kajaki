@@ -8,6 +8,9 @@ class Solver:
 
     def solve(self, pairs):
         graphII = self.create_graphII_from_pairs(pairs)
+        return self.solve(graphII)
+
+    def solve_graph(self, graphII):
         graphI = self.create_graphI_from_graphII(graphII)
         graph = self.create_graph_from_graphI(graphI)
         return self.find_best_order(graph)
@@ -27,12 +30,11 @@ class Solver:
 
     def find_best_order(self, graph):
         order = []
-        matching = nx.maximal_matching(graph)
+        matching = nx.max_weight_matching(graph, True)
         while len(matching) > 0:
             for turn in matching:
                 order.append(turn)
-                for pair in turn:
-                    graph.remove_node(pair)
+                graph.remove_node(turn)
             matching = nx.maximal_matching(graph)
 
         for node in graph.nodes_iter():
