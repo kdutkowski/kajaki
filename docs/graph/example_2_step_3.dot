@@ -10,13 +10,13 @@ graph example_1 {
     f [label="2|6"];
     g [label="1|6"];
 
-
-    e -- a;
     a -- c [color=red];
-    b -- e;
+    a -- d;
+    a -- e;
     b -- g [color=red];
-    b -- d;
+    b -- e;
     c -- f;
+    c -- g;
     d -- f [color=red];
     d -- g;
 
