@@ -107,10 +107,8 @@ wierzchołek. Wierzchołki są połączone krawędzią wtedy
 i tylko wtedy gdy odpowiadające im dwie osoby chcą płynąć razem.
 Następnie tworzymy graf krawędziowy $G'$ z grafu $G''$.
 
-Ostatnim krokiem jest wyznaczenie grafu $G$
-o zbiorze wierzchołków równym $V(G')$, ale krawędzią
-połączone będą tylko te wierzchołki, między którymi w grafie $G'$
-istnieje ścieżka długości 2 i nie istnieje ścieżka długości 1.
+Ostatnim krokiem jest wyznaczenie grafu $G$,
+dopełnienia grafu $G'$.
 \\\\
 W tak otrzymanym grafie $G$ szukamy największego 
 skojarzenia. Znalezione krawędzie definują
@@ -199,7 +197,7 @@ Ponadto konstrukcja grafu $G$ zapewnia, że żadna z par wierzchołków należą
 \end{proof}
 
 \subsection{Oszacowanie złożoności}
-Budowanie grafu $G$ wymaga zbudowania grafu krawędziowego i znalezienie w nim ścieżek długości 2. 
+Budowanie grafu $G$ wymaga zbudowania grafu krawędziowego i jego dopełnienia
 
 
 Zbudowanie grafu krawędziowego $G''$
@@ -207,7 +205,8 @@ wymaga przejścia przez wszystkie krawędzie grafu i sprawdzenia, czy ma punkty 
 szacować jako $O(E^2)$. 
 
 
-Aby wyznaczyć graf $G'$ wystarczy podnieść macierz sąsiedztwa do kwadratu i porównać z oryginalną macierzą sąsiedztwa. Złożoność szacujemy jako $O(V^3)$.
+Aby wyznaczyć graf $G$ wystarczy przejśc przez macież adjacencji $G'$ i zamienić
+$0$ na $1$. Złożoność szacujemy jako $O(V^2)$.
 
  
 Wyszukiwanie maksymalnego skojarzenia grafu możemy oszacować przez $O(|V|^4)$\cite{wiki-blossom}.
