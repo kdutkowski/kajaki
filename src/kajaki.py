@@ -13,7 +13,11 @@ def main():
     logger = logging.getLogger('kajaki')
     coloredlogs.install(level=logging.DEBUG)
 
+    if len(args) < 1:
+        logger.error("no file path specified")
+        return
     input_path = args[0]
+
     logger.info("reading input data from %s" % (input_path))
     pairs = read_pairs_from_input(input_path)
     logger.info("read %d pairs" % len(pairs))
