@@ -1,4 +1,4 @@
-# Data Extractor
+# Kajaki
 
     virtualenv venv
     source venv/bin/activate
