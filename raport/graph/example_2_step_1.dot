@@ -1,0 +1,20 @@
+ graph example_1 {
+   layout=neato;
+     a [label="1"];
+     b [label="2"];
+     c [label="3"];
+     d [label="4"];
+     e [label="5"];
+     f [label="6"];
+
+     a -- b;
+     a -- f;
+     b -- c;
+     b -- f;
+     c -- e;
+     d -- e;
+     e -- f;
+
+  { rank=same; b c }
+  { rank=same; f e d }
+ }
