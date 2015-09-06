@@ -50,6 +50,14 @@ Wydział Matematyki i Nauk Informacyjnych
 
 \keywords{Kajaki}
 %
+\section{Wstęp}
+W celu zbadania poprawności działania programu, przeprowadziliśmy testy na następujących zestawach danych:
+\begin{enumerate}
+\item dane przypadkowe
+\item dane, w których jedna liczba jest zawarta w każdej parze wejściowej
+\item dane, w których graf par wejściowych jest cyklem
+\end{enumerate}
+
 \section{Treść zadania}
 Są dwa kajaki, $n$ osób i zbiór par osób które chcą się
 przepłynać kajakiem razem (jedna osoba może kolejno z wieloma osobami się
@@ -57,6 +65,64 @@ przepłynać). Zastosować algorytm znajdujący skojarzenie doskonałe do
 wyznaczenia rozkładu jazdy kajaków, tak aby zminimalizować ilość kursów
 pojedynczym kajakiem, spełniając życzenia wszystkich osób.
 
+\section{Wyniki testów}
+\subsection{Zestaw 1.}
+\begin{example} \label{przyklad} ~\\
+\begin{lstlisting}[title=Wejście]
+6 7
+1 2
+1 6
+2 3
+2 6
+3 5
+4 5
+5 6
+\end{lstlisting}
+\begin{lstlisting}[title=Wyjście]
+(1, 2), (5, 6)
+(2, 6), (3, 5)
+(6, 7), (2, 3)
+(4, 5), (1, 6)
+\end{lstlisting}
+
+\subsection{Zestaw 2.}
+\begin{example} \label{Zestaw 2.} ~\\
+\begin{lstlisting}[title=Wejście]
+1 7
+1 2
+1 6
+1 3
+1 4
+1 5
+1 8
+1 9	
+\end{lstlisting}
+\begin{lstlisting}[title=Wyjście]
+(1, 2), ()
+(1, 3), ()
+(1, 4), ()
+(1, 5), ()
+(1, 8), ()
+(1, 6), ()
+(1, 9), ()
+(1, 7), ()
+\end{lstlisting}
+
+\subsection{Zestaw 3.}
+\begin{example} \label{przyklad} ~\\
+\begin{lstlisting}[title=Wejście]
+1 2
+2 3
+3 4
+5 6
+6 7
+7 1
+\end{lstlisting}
+\begin{lstlisting}[title=Wyjście]
+(1, 2), (3, 4)
+(6, 7), (2, 3)
+(5, 6), (1, 7)
+\end{lstlisting}
 
 % ---- Bibliography ----
 %
