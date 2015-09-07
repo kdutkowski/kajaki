@@ -54,6 +54,7 @@ Wydział Matematyki i Nauk Informacyjnych
 W celu zbadania poprawności działania programu, przeprowadziliśmy testy na następujących zestawach danych:
 \begin{enumerate}
 \item dane przypadkowe
+\item dane przypadkowe
 \item dane, w których jedna liczba jest zawarta w każdej parze wejściowej
 \item dane, w których graf par wejściowych jest cyklem
 \end{enumerate}
@@ -67,7 +68,7 @@ pojedynczym kajakiem, spełniając życzenia wszystkich osób.
 
 \section{Wyniki testów}
 \subsection{Zestaw 1.}
-\begin{example} \label{przyklad} ~\\
+\begin{example} \label{Zestaw1} ~\\
 \begin{lstlisting}[title=Wejście]
 6 7
 1 2
@@ -85,8 +86,28 @@ pojedynczym kajakiem, spełniając życzenia wszystkich osób.
 (4, 5), (1, 6)
 \end{lstlisting}
 
+\section{Wyniki testów}
 \subsection{Zestaw 2.}
-\begin{example} \label{Zestaw 2.} ~\\
+\begin{example} \label{Zestaw2} ~\\
+\begin{lstlisting}[title=Wejście]
+1 2
+3 4
+3 2
+3 6
+3 5
+1 7
+7 3
+\end{lstlisting}
+\begin{lstlisting}[title=Wyjście]
+(1, 2), (3, 5)
+(1, 7), (3, 4)
+(2, 3), ()
+(3, 6), ()
+(3, 7), ()
+\end{lstlisting}
+
+\subsection{Zestaw 3.}
+\begin{example} \label{Zestaw3} ~\\
 \begin{lstlisting}[title=Wejście]
 1 7
 1 2
@@ -108,21 +129,43 @@ pojedynczym kajakiem, spełniając życzenia wszystkich osób.
 (1, 7), ()
 \end{lstlisting}
 
-\subsection{Zestaw 3.}
-\begin{example} \label{przyklad} ~\\
+\subsection{Zestaw 4.}
+\begin{example} \label{Zestaw4} ~\\
 \begin{lstlisting}[title=Wejście]
 1 2
 2 3
 3 4
 5 6
 6 7
-7 1
+7 8
+8 1
 \end{lstlisting}
 \begin{lstlisting}[title=Wyjście]
-(1, 2), (3, 4)
-(6, 7), (2, 3)
-(5, 6), (1, 7)
+(1, 2), (7, 8)
+(5, 6), (2, 3)
+(1, 8), (3, 4)
+(6, 7), ()
 \end{lstlisting}
+
+\section{Opis wyników}
+W każdym z przedstawionych przypadków program działał poprawnie. 
+
+\subsection{Zestaw 1}
+W zestawie nr 1 wszystkie wymagania zostały spełnione już w czterech rundach, w każdej rundzie oba kajaki są wypełnione, więc nie istnieje lepsze rozwiązanie.
+
+\subsection{Zestaw 2}
+W zestawie nr 2 aż 5 par zawiera liczbę 3, stąd wiadomo że najlepsze rozwiązanie nie może być mniejsze niż 5 rund. Zostało znalezione właśnie takie rozwiązanie i jest ono zgodne z warunkami zadania, stąd wiadomo że algorytm zadziałał poprawnie.
+
+\subsection{Zestaw 3}
+Zestaw 3 jest przypadkiem szczególnym, w którym jedna z liczb występuje w dokładnie każdej parze, stąd wiadomo że nie może istnieć rozwiązanie lepsze niż znalezione przez algorytm. Oczywiście widać, że znalezione rozwiązanie jest poprawne
+
+\subsection{Zestaw 4}
+Zestaw 4 jest przypadkiem szczególnym, w którym graf rozkładu pływania zawiera cykl. Widać i tutaj, że rozwiązanie krótsze nie istnieje, a znalezione jest poprawne.
+
+\section{Wnioski}
+W raporcie przedstawione zostały niektóre przypadki na których testowane było rozwiązanie zadania przedstawiające zarówno dane przypadkowe jak i wybrane w sposób szczególny.
+
+W testach nie znaleziono przypadków, dla których algorytm zadziałał by źle, więc można wnioskować, że implementacja jest poprawna.
 
 % ---- Bibliography ----
 %
