@@ -12,6 +12,11 @@ class Solver:
         graph = self.create_graph_from_graphI(graphI)
         return self.find_best_order(graph)
 
+    def solveFromGraphII(self, graphII):
+        graphI = self.create_graphI_from_graphII(graphII)
+        graph = self.create_graph_from_graphI(graphI)
+        return self.find_best_order(graph)
+
     def create_graphII_from_pairs(self, pairs):
         graph = nx.Graph()
         graph.add_edges_from(pairs)
