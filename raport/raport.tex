@@ -14,9 +14,9 @@
 \usepackage[polish]{babel}
 \usepackage[colorinlistoftodos]{todonotes}
 \usepackage{hyperref}
-\usepackage{subfig}
+\usepackage{subfigure}
 \usepackage[]{algorithm2e}
-
+\usepackage[]{graphicx}
 \usepackage{float}
 
 \usepackage{listings}
@@ -85,6 +85,7 @@ pojedynczym kajakiem, spełniając życzenia wszystkich osób.
 (6, 7), (2, 3)
 (4, 5), (1, 6)
 \end{lstlisting}
+\end{example}
 
 \section{Wyniki testów}
 \subsection{Zestaw 2.}
@@ -105,6 +106,7 @@ pojedynczym kajakiem, spełniając życzenia wszystkich osób.
 (3, 6), ()
 (3, 7), ()
 \end{lstlisting}
+\end{example}
 
 \subsection{Zestaw 3.}
 \begin{example} \label{Zestaw3} ~\\
@@ -128,6 +130,7 @@ pojedynczym kajakiem, spełniając życzenia wszystkich osób.
 (1, 9), ()
 (1, 7), ()
 \end{lstlisting}
+\end{example}
 
 \subsection{Zestaw 4.}
 \begin{example} \label{Zestaw4} ~\\
@@ -146,6 +149,7 @@ pojedynczym kajakiem, spełniając życzenia wszystkich osób.
 (1, 8), (3, 4)
 (6, 7), ()
 \end{lstlisting}
+\end{example}
 
 \section{Opis wyników}
 W każdym z przedstawionych przypadków program działał poprawnie. 
@@ -161,6 +165,56 @@ Zestaw 3 jest przypadkiem szczególnym, w którym jedna z liczb występuje w dok
 
 \subsection{Zestaw 4}
 Zestaw 4 jest przypadkiem szczególnym, w którym graf rozkładu pływania zawiera cykl. Widać i tutaj, że rozwiązanie krótsze nie istnieje, a znalezione jest poprawne.
+
+\section{Opracowanie złożoności}
+W celu sprawdzenia poprawności wyznaczonej teoretycznie złożoności algorytmu
+\begin{equation}
+O(|V|^6)
+\end{equation}
+Przeprowadzono testy, w których dla liczby wierchołków ($|V|$) kolejno $[5, 10, 15, 20, 25, 30, 35, 40, 45, 50]$ i liczby krawędzi ($|E|$) równej $|E|=\alpha\times|V|$, dla $\alpha$ kolejno $[0.25, 0.50, 0.75, 1.0]$ generowano grafy losowe. 
+
+Na wykresach \autoref{fig:complexity} przedstawiono zależność znormalizowanego czasu wykonania algorytmu od liczby wierzchołków dla różnych $\alpha$. Do wyliczonych punktów dopasowano krzywą $f(x) = a\times x^6 + b$. Przedstawione wartości są średnią z 50 pomiarów wykonanych dla każdej wartości parametrów.
+
+Z wykresów można wnioskować, że wyznaczona złożoność pokrywa się z wartościami empirycznymi. 
+
+\begin{figure}
+\centering
+\begin{subfigure}
+  \centering
+  \includegraphics[width=.4\linewidth]{img/25.png}
+  \caption{$\alpha=0.25$}
+  \label{fig:sub1}
+\end{subfigure}%
+\begin{subfigure}
+  \centering
+  \includegraphics[width=.4\linewidth]{img/50.png}
+  \caption{$\alpha=0.50$}
+  \label{fig:sub2}
+\end{subfigure}
+%
+\begin{subfigure}
+  \centering
+  \includegraphics[width=.4\linewidth]{img/75.png}
+  \caption{$\alpha=0.75$}
+  \label{fig:sub2}
+\end{subfigure}
+%
+\begin{subfigure}
+  \centering
+  \includegraphics[width=.4\linewidth]{img/100.png}
+  \caption{$\alpha=1.00$}
+  \label{fig:sub2}
+\end{subfigure}
+%
+\begin{subfigure}
+  \centering
+  \includegraphics[width=.4\linewidth]{img/150.png}
+  \caption{$\alpha=1.50$}
+  \label{fig:sub2}
+\end{subfigure}
+\caption{Wykresy zależności znormalizowanego czasu wykonania od liczby krawędzi}
+\label{fig:complexity}
+\end{figure}
 
 \section{Wnioski}
 W raporcie przedstawione zostały niektóre przypadki na których testowane było rozwiązanie zadania przedstawiające zarówno dane przypadkowe jak i wybrane w sposób szczególny.
